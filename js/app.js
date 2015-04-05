@@ -16,6 +16,7 @@ var start = document.getElementById('start');
 var stop = document.getElementById('stop');
 var tracks = document.getElementsByClassName("tracks");
 var results = document.getElementById('results');
+var target = document.getElementById('target');
 
 SC.stream('/tracks/293', function(sound) {
 
@@ -49,11 +50,14 @@ function showTrackList(genre) {
       tracks.forEach(function(track, index) {
         // console.log(track);
 
-        results.innerHTML = results.innerHTML + '<li>'+track.title + ' - ' + track.genre+' </li>';
+        results.innerHTML = results.innerHTML + '<li onclick="playTrack('+track.id+')">'+track.title + ' - ' + track.genre+'  </li>';
       });
     });
 }
 
+function playTrack(id) {
+  target.innerHTML = '<iframe id="soundcloud_widget" src="http://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/'+id+'&show_artwork=false&liking=false&sharing=false&auto_play=true" width="420" height="120" frameborder="no"></iframe>'
+}
 
 
 
