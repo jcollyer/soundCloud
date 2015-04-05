@@ -43,6 +43,19 @@ function playSomeSound(genre){
   })
 }
 
+function showTrackList(genre) {
+  SC.get('/tracks', { genres: genre }, function(tracks) {
+
+      tracks.forEach(function(track, index) {
+        // console.log(track);
+
+        results.innerHTML = results.innerHTML + '<li>'+track.title + ' - ' + track.genre+' </li>';
+      });
+    });
+}
+
+
+
 
 window.onload = function() {
   SC.initialize({
@@ -51,12 +64,24 @@ window.onload = function() {
   });
 
   var menuLinks = document.getElementsByClassName('genre');
+  var results = document.getElementById('results');
 
-  for (i = 0; i < menuLinks.length; i++){
-    var menuLink = menuLinks[i];
-    menuLink.onclick = function(e) {
-      e.preventDefault;
-      playSomeSound(menuLink.innerHTML);
-    }
+
+  showList = function(genre) {
+    results.innerHTML = "";
+    console.log(genre);
+    showTrackList(genre);
   }
+
+  // for (i = 0; i < menuLinks.length; i++){
+  //   var menuLink = menuLinks[i];
+
+  //   menuLink.onclick = function(e) {
+  //     e.preventDefault;
+  //     // playSomeSound(menuLink.innerHTML);
+  //     results.innerHTML = "";
+  //     console.log(menuLink.innerHTML);
+  //     showTrackList(menuLink.innerHTML);
+  //   }
+  // }
 }
